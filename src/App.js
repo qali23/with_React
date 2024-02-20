@@ -1,4 +1,5 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
+import { Link } from "react-router-dom";
 import yzma1 from "./Images/how_shall_I_do_it.gif";
 import yzma2 from "./Images/its_dinner_time.gif";
 import butterSandwich from "./Images/butter_sandwich.jpg";
@@ -7,19 +8,47 @@ import vomiting from "./Images/vomiting.jpg";
 import ohYeahImage from "./Images/oh_yeah_its_all_coming_together.gif";
 
 
-  function Submit_new_recipe(){
-    let dish_name = document.getElementById("fname").value;
-    let dish_recipe = document.getElementById("lname").value;
 
-    <Recipe name={dish_name} recipe = {dish_recipe}/>
-  }
+  function Header({add_new_recipe, eachRecipe}){
+    const [recipeLink, setRecipeLink] = useState([]);
 
+    function EachLink({dish_name, href_for_recipe}){
+      return(
+        <a key={dish_name} href={href_for_recipe}>{dish_name}</a>
+      )
+    }
 
-  function Header(){
+    const addRecipeLinks = () => {
+      setRecipeLink([...recipeLink,
+        <EachLink dish_name="Butter Sandwitch" href_for_recipe="#Butter Sandwitch - I cannot remember how to spell sandwich"/>,
+        <EachLink dish_name="Jam Sandwich" href_for_recipe="#Jam Sandwich"/>])
+    }
+
+    useEffect(() => {
+      addRecipeLinks();
+    },[]);
+
+    function Add_recipe_links(){
+      let dish_name = document.getElementById("fname").value;
+      let dish_recipe = document.getElementById("lname").value;
+      const href_for_recipe = "#" + dish_name;
+      setRecipeLink([...recipeLink, <EachLink dish_name={dish_name} href_for_recipe={href_for_recipe}/>])
+    }
+
+    function check_recipe_already_exists(){
+      let dish_name = document.getElementById("fname").value;
+      const existingRecipe = eachRecipe.find((recipe) => recipe.props.name === dish_name);
+      if (!existingRecipe){
+        add_new_recipe();
+        Add_recipe_links();
+      }
+    }
+
     return (
       <header className="App-header">
       <h1>RECIPES AND FOOD</h1>
           <nav>
+            <Link to="/blog">Blog</Link>
             <a href="recipe_homepage.html">Home Page</a>
             <a href="ingredients.html">Ingredients</a>
           </nav> 
@@ -34,13 +63,16 @@ import ohYeahImage from "./Images/oh_yeah_its_all_coming_together.gif";
               <label for="Recipe">Recipe:</label>
               <input type="text" id="lname" name="lname"/>
             </div>
-            <button id="submit_button" type="submit" onClick={() => Submit_new_recipe}>submit</button>
+            <button id="submit_button" type="submit" onClick= {(e) => {
+              e.preventDefault();
+              check_recipe_already_exists();
+              }}>submit</button>
           </form> 
-    
           <nav id="dish_names">
-              <a href="#Butter Sandwitch - I cannot remember how to spell sandwich">Butter Sandwitch</a>
-              <a href="#Jam Sandwich">Jam Sandwich</a>
-          </nav> 
+            {recipeLink}
+          </nav>
+    
+           
       </header>
     )
   }
@@ -58,7 +90,7 @@ import ohYeahImage from "./Images/oh_yeah_its_all_coming_together.gif";
 
   function Recipe({name, recipe, imageSrc = ohYeahImage}){
     return(
-      <article class="recipe" id={name}>
+      <article class="recipe" id={name} key={name}>
         <h2>{name}</h2>
         <img src ={imageSrc} alt = "an image"/>
         <ul>{recipe}</ul>
@@ -67,7 +99,7 @@ import ohYeahImage from "./Images/oh_yeah_its_all_coming_together.gif";
   }
 
 
-  function All_Recipes(){
+  function All_Recipes({eachRecipe, setRecipe}){
     let butterSandwich_recipe = <ul>
           <li>Start with bread</li>
           <li>Add butter :)</li>
@@ -86,10 +118,10 @@ import ohYeahImage from "./Images/oh_yeah_its_all_coming_together.gif";
         <li class="small_text">get bread add peanut butter</li>
       </ul>;
 
-    const [recipe, setRecipe] = useState([]);
+  
 
     const addRecipes = () => {
-      setRecipe([...recipe,
+      setRecipe([...eachRecipe,
         <Recipe name="Butter Sandwitch - I cannot remember how to spell sandwich"
         recipe = {butterSandwich_recipe} imageSrc={butterSandwich}/>,
         <Recipe name="Jam Sandwich"
@@ -105,16 +137,25 @@ import ohYeahImage from "./Images/oh_yeah_its_all_coming_together.gif";
     return(
       <article id="all-recipes">
           <Yzma_image/>
-          {recipe}
+
+          {eachRecipe}
         </article>
     )
   }
 
 function App() {
+  const [eachRecipe, setRecipe] = useState([]);
+
+  function Submit_new_recipe(){
+    let dish_name = document.getElementById("fname").value;
+    let dish_recipe = document.getElementById("lname").value;
+    setRecipe([...eachRecipe, <Recipe name={dish_name} recipe = {dish_recipe}/>]);
+  }
+
   return (
     <div className="App">
-      <Header/>
-      <All_Recipes/>
+      <Header add_new_recipe={Submit_new_recipe} eachRecipe={eachRecipe}/>
+      <All_Recipes eachRecipe={eachRecipe} setRecipe={setRecipe}/>
     </div>
   );
 }
