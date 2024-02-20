@@ -11,3 +11,89 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+body {
+  background-color: rgba(0, 0, 0, 0.966);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header{
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  margin-bottom: 1%;
+  background-color: darkgrey;
+  padding-bottom: 1em;
+  margin: 0 -1em;
+  padding-left: 5%;
+}
+h1 {
+  color: blue;
+}
+h2 {
+  color: rgba(30, 51, 88, 0.781);
+  text-decoration: underline;
+  text-decoration-color: rgba(30, 51, 88, 0.781);
+  border-top: 1px solid white;
+  border-top-style: dashed;
+}
+p {
+  color: rgb(0, 225, 255);
+}
+ul{
+  color: rgb(0, 225, 255);
+}
+nav,a{
+  font-weight: 400;
+  text-align: center;
+  margin: 1% 1%;
+  color:rgb(252, 0, 210);
+  
+
+
+}
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  border-radius: 5%;
+}
+#si{
+  width: 75%;
+  height: auto;
+}
+
+
+label{
+  color: rgb(12, 30, 46);
+  display: block;
+  text-align: left;
+}
+
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type=text], select {
+  width: 100%;
+  height: 30px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button{
+  width: 20%;
+  margin: 1% 1%;
+  height: 30px;
+}
+
+.small_text{
+  font-size: xx-small;
+}
