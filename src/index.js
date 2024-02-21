@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Blog from './pages/Blog';
+import RecipesHomepage from './pages/RecipesHomepage';
+import Ingredients from './pages/Ingredients';
+import Actors from './pages/Actors';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -17,6 +20,18 @@ const router = createBrowserRouter([
   {
     path: "blog",
     element: <Blog/>,
+  },
+  {
+    path: "recipe_homepage",
+    element: <RecipesHomepage/>,
+  },
+  {
+    path: "ingredients",
+    element: <Ingredients/>,
+  },
+  {
+    path: "chefs",
+    element: <Actors/>,
   }
 ]);
 
