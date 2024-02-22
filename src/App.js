@@ -46,7 +46,7 @@ function Header({recipeLink, setRecipeLink, add_new_recipe, eachRecipe}){
 
   return (
     <header className="App-header">
-    <h1>RECIPES AND FOOD</h1>
+    <h1 data-testid="all-recipes">RECIPES AND FOOD</h1>
         <MainLayout>
           <form>
             <div class = "input">
