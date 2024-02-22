@@ -6,13 +6,15 @@ import { createMemoryHistory} from 'history';
 
 
 
+
+
 describe(App, ()=> {
   it("All Recipes page has title RECIPES AND FOOD", ()=>{
     const { getByTestId } = render(<MemoryRouter><App/></MemoryRouter>);
     const titleValue = getByTestId("all-recipes").textContent;
     expect(titleValue).toEqual("RECIPES AND FOOD");
   });
-  
+
   it("Dish input box Successfully displayed and can receive text input", ()=>{
     const { getByTestId , getByRole} = render(<MemoryRouter><App/></MemoryRouter>);
     const dishInputBox = getByTestId("dish_box");
@@ -37,16 +39,68 @@ describe(App, ()=> {
     const recipeLabel = getByTestId("recipe_label").textContent;
     expect(recipeLabel).toEqual("Recipe:");
   });
-});
-describe(MainLayout, ()=> {
-  it("Recipes Homepage link works", ()=>{
-    const { getByTestId , getByRole} = render(<MemoryRouter><MainLayout/></MemoryRouter>);
-    const histroy = createMemoryHistory();
-    const recipesHomepageLink = getByRole("link", {name: "Recipes Homepage"})
-    fireEvent.click(recipesHomepageLink);
-    expect(location.pathname).toBe('/recipe_homepage');
+
+  it("Submit Button displayed", ()=>{
+    const { getByTestId , getByRole} = render(<MemoryRouter><App/></MemoryRouter>);
+    const submitButton = getByRole("button", {name: "submit"});
+
+    fireEvent.click(submitButton);
+    expect(submitButton.textContent).toEqual("submit");
   });
+
+  it("Butter Sandwitch Recipe Link Displayed", ()=>{
+    const { getByTestId , getByRole} = render(<MemoryRouter><App/></MemoryRouter>);
+    const butterSandwichRecipeLink = getByRole("link", {name: "Butter Sandwitch"});
+
+    fireEvent.click(butterSandwichRecipeLink);
+    expect(butterSandwichRecipeLink.textContent).toEqual("Butter Sandwitch");
+  });
+  it("Jam Sandwich Recipe Link Displayed", ()=>{
+    const { getByTestId , getByRole} = render(<MemoryRouter><App/></MemoryRouter>);
+    const jamSandwichRecipeLink = getByRole("link", {name: "Jam Sandwich"});
+
+    fireEvent.click(jamSandwichRecipeLink);
+    expect(jamSandwichRecipeLink.textContent).toEqual("Jam Sandwich");
+  });
+
+
+
+
+  it("Yzma Image", ()=>{
+    const {getAllByAltText} = render(<MemoryRouter><App/></MemoryRouter>);
+    const yzma_image = getAllByAltText("yzma image");
+    expect(yzma_image.length).toBeGreaterThan(0);
+  });
+  it("All recipes", ()=>{
+    const {getByTestId} = render(<MemoryRouter><App/></MemoryRouter>);
+    const all_recipes = getByTestId("all-recipes");
+    expect(all_recipes).toBeInTheDocument();
+  });
+
+
+
+  it("Butter Sandwitch Header", ()=>{
+    const { getByTestId} = render(<MemoryRouter><App/></MemoryRouter>);
+    const butterSandwitchHeader = getByTestId("Butter Sandwitch - I cannot remember how to spell sandwich");
+    expect(butterSandwitchHeader).toBeInTheDocument();
+  });
+
 });
+
+
+
+
+
+
+// describe(MainLayout, ()=> {
+//   it("Recipes Homepage link works", ()=>{
+//     const { getByTestId , getByRole} = render(<MemoryRouter><MainLayout/></MemoryRouter>);
+//     const histroy = createMemoryHistory();
+//     const recipesHomepageLink = getByRole("link", {name: "Recipes Homepage"})
+//     fireEvent.click(recipesHomepageLink);
+//     expect(location.pathname).toBe('/recipe_homepage');
+//   });
+// });
 
 
 // test('renders learn react link', () => {

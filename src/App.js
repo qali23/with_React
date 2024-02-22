@@ -73,9 +73,15 @@ function Header({recipeLink, setRecipeLink, add_new_recipe, eachRecipe}){
   
 function Yzma_image(){
   const [mouseHover, setMouseHover] = useState(false);
+  //{require({src_image})}
+  if(mouseHover){
+    let src_image = yzma2;
+  } else{
+    let src_image = yzma1;
+  }
   return (
-    <img src= {mouseHover? yzma2 : yzma1 }
-    id="yzma" height="200px" width="auto" alt = "an image" 
+    <img src= {mouseHover? yzma2: yzma1}
+    id="yzma" height="200px" width="auto" alt = "yzma image" 
     onMouseEnter={() => setMouseHover(true)}
     onMouseLeave={() => setMouseHover(false)}/>
   )
@@ -96,7 +102,7 @@ function Recipe({name, recipe, imageSrc}){
       <img src= {ohYeahImage} alt = "an image"/>
     </Link>
   return(
-    <article class="recipe" id={name} key={name}>
+    <article data-testid={name} class="recipe" id={name} key={name}>
       <h2>{name}</h2>
         {image_or_link}
       <ul>{recipe}</ul>
@@ -155,7 +161,7 @@ function All_Recipes({recipeLink, setRecipeLink, eachRecipe, setRecipe}){
 
   
   return(
-    <article id="all-recipes">
+    <article data-testid= "all-recipes" id="all-recipes">
         <Yzma_image/>
 
         {eachRecipe}
