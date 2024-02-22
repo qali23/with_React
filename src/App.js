@@ -46,7 +46,7 @@ function Header({recipeLink, setRecipeLink, add_new_recipe, eachRecipe}){
 
   return (
     <header className="App-header">
-    <h1 data-testid="all-recipes">RECIPES AND FOOD</h1>
+    <h1 data-testid="recipes_page">RECIPES AND FOOD</h1>
         <MainLayout>
           <form>
             <div class = "input">
@@ -161,7 +161,7 @@ function All_Recipes({recipeLink, setRecipeLink, eachRecipe, setRecipe}){
 
   
   return(
-    <article data-testid= "all-recipes" id="all-recipes">
+    <article data-testid="all-recipes" id="all-recipes">
         <Yzma_image/>
 
         {eachRecipe}

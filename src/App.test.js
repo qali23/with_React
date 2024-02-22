@@ -11,7 +11,7 @@ import { createMemoryHistory} from 'history';
 describe(App, ()=> {
   it("All Recipes page has title RECIPES AND FOOD", ()=>{
     const { getByTestId } = render(<MemoryRouter><App/></MemoryRouter>);
-    const titleValue = getByTestId("all-recipes").textContent;
+    const titleValue = getByTestId("recipes_page").textContent;
     expect(titleValue).toEqual("RECIPES AND FOOD");
   });
 
@@ -71,18 +71,18 @@ describe(App, ()=> {
     const yzma_image = getAllByAltText("yzma image");
     expect(yzma_image.length).toBeGreaterThan(0);
   });
-  it("All recipes", ()=>{
-    const {getByTestId} = render(<MemoryRouter><App/></MemoryRouter>);
-    const all_recipes = getByTestId("all-recipes");
-    expect(all_recipes).toBeInTheDocument();
+  it("All recipes", async()=>{
+    render(<MemoryRouter><App/></MemoryRouter>);
+    const all_recipes = await screen.findAllByTestId("all-recipes");
+    expect(all_recipes.length).toBeGreaterThan(0);
   });
 
 
 
-  it("Butter Sandwitch Header", ()=>{
-    const { getByTestId} = render(<MemoryRouter><App/></MemoryRouter>);
-    const butterSandwitchHeader = getByTestId("Butter Sandwitch - I cannot remember how to spell sandwich");
-    expect(butterSandwitchHeader).toBeInTheDocument();
+  it("Butter Sandwitch Header", async()=>{
+    render(<MemoryRouter><App/></MemoryRouter>);
+    const butterSandwichTitle = await screen.findByTestId("Butter Sandwitch - I cannot remember how to spell sandwich");    
+    expect(butterSandwichTitle).toBeInTheDocument();
   });
 
 });
