@@ -50,12 +50,12 @@ function Header({recipeLink, setRecipeLink, add_new_recipe, eachRecipe}){
         <MainLayout>
           <form>
             <div class = "input">
-              <label for="dish">Dish:</label>
-              <input type="text" id="fname" name="fname"/>
+              <label data-testid="dish_label" for="dish">Dish:</label>
+              <input data-testid="dish_box" type="text" id="fname" name="fname"/>
             </div>
             <div class = "input">
-              <label for="Recipe">Recipe:</label>
-              <input type="text" id="lname" name="lname"/>
+              <label data-testid="recipe_label" for="Recipe">Recipe:</label>
+              <input data-testid="recipe_box" type="text" id="lname" name="lname"/>
             </div>
             <button id="submit_button" type="submit" onClick= {(e) => {
               e.preventDefault();
