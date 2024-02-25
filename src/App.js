@@ -7,14 +7,15 @@ import jamSandwich from "./Images/jam_sandwich.jpg";
 import vomiting from "./Images/vomiting.jpg";
 import ohYeahImage from "./Images/oh_yeah_its_all_coming_together.gif";
 import MainLayout from "./layout/MainLayout";
-
-
+//https://github.com/elad2412/the-new-css-reset/blob/main/css/reset.css
+import "./reset.css"
 
 function Header({recipeLink, setRecipeLink, add_new_recipe, eachRecipe}){
   
   function EachLink({dish_name, href_for_recipe}){
+    const linkID = dish_name + "_link";
     return(
-      <a key={dish_name} href={href_for_recipe}>{dish_name}</a>
+      <a id={linkID} key={dish_name} href={href_for_recipe}>{dish_name}</a>
     )
   }
 
@@ -73,12 +74,6 @@ function Header({recipeLink, setRecipeLink, add_new_recipe, eachRecipe}){
   
 function Yzma_image(){
   const [mouseHover, setMouseHover] = useState(false);
-  //{require({src_image})}
-  if(mouseHover){
-    let src_image = yzma2;
-  } else{
-    let src_image = yzma1;
-  }
   return (
     <img src= {mouseHover? yzma2: yzma1}
     id="yzma" height="200px" width="auto" alt = "yzma image" 

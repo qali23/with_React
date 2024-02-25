@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 
 function MainLayout({children}){
     return(
-        <header ClassName="App-header">
+        <div ClassName="App-header">
             <nav>
                 
-                <Link to="/recipe_homepage">Recipes Homepage</Link>
-                <Link to="/">All Recipes</Link>
-                <Link to="/ingredients">Ingredients</Link>
-                <Link to="/chefs">Chefs</Link>
+                <Link id="recipesHomepage" to="/recipe_homepage">Recipes Homepage</Link>
+                <Link id="allRecipes" to="/">All Recipes</Link>
+                <Link id="ingredients" to="/ingredients">Ingredients</Link>
+                <Link id="chefs" to="/chefs">Chefs</Link>
                 <div>{children}</div>
             </nav> 
-        </header>
+        </div>
     )
 }
 

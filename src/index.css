@@ -1,12 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -14,43 +5,100 @@ code {
 
 
 body {
-  background-color: rgba(0, 0, 0, 0.966);
+  background-color: rgb(8, 66, 23);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
+  margin: 0;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 header{
   border-bottom-left-radius: 20%;
   border-bottom-right-radius: 20%;
   margin-bottom: 1%;
-  background-color: darkgrey;
+  background-color: rgb(97, 45, 11);
   padding-bottom: 1em;
   margin: 0 -1em;
   padding-left: 5%;
 }
 h1 {
-  color: blue;
+  color: rgb(17, 160, 255);
+  font-size: 2rem;
+  font-weight: bold;
 }
 h2 {
-  color: rgba(30, 51, 88, 0.781);
+  color: rgba(26, 75, 161, 0.781);
   text-decoration: underline;
   text-decoration-color: rgba(30, 51, 88, 0.781);
   border-top: 1px solid white;
-  border-top-style: dashed;
+  border-top-style: solid;
+  border-top: ;
+  font-size: 1.75rem;
+  font-weight: bold;
 }
 p {
   color: rgb(0, 225, 255);
 }
 ul{
   color: rgb(0, 225, 255);
-}
-nav,a{
-  font-weight: 400;
-  text-align: center;
-  margin: 1% 1%;
-  color:rgb(252, 0, 210);
+  margin-top: 2rem;
   
 
-
 }
+#chefNames{
+  list-style: square;
+  column-count: 5;
+}
+article{
+  outline-color: aqua;
+  margin: 5% auto;
+  padding-top: 1%;
+  padding-left: 1%;
+  border-color: aqua;
+}
+nav{
+  font-weight: 400;
+  text-align: center;
+  margin: 3% 10%;
+  text-decoration: none;
+  color:rgb(133, 4, 111);
+}
+
+a{
+  font-weight: 400;
+  text-align: center;
+  margin: 3% 1%;
+  text-decoration: none;
+  color:rgb(255, 5, 213);
+  padding: 1px 0;
+  box-shadow: 0px 1px 0px #dedede;
+}
+header.App-header a {
+  position: relative;
+}
+header.App-header a {
+  transition: all 0.5s;
+}
+
+header.App-header a:after {
+  text-align: left;
+  content: '.';
+  margin: 0;
+  opacity: 0;
+}
+header.App-header a:hover {
+  color: aqua;
+  z-index: 1;
+}
+header.App-header a:hover:after {
+  z-index: -10;
+  animation: fill 1s forwards;
+  -webkit-animation: fill 1s forwards;
+  -moz-animation: fill 1s forwards;
+  opacity: 1;
+}
+
+
 img{
   display: block;
   margin-left: auto;
@@ -64,18 +112,31 @@ img{
 }
 
 
-label{
-  color: rgb(12, 30, 46);
-  display: block;
-  text-align: left;
+:root {
+  --light-green: rgb(154, 185, 156);
 }
 
+label{
+  color: var(--light-green);
+  font-weight: 700;
+  font-style: oblique;
+  display: block;
+  text-align: left;
+  
+}
 
 form{
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px auto 0 auto;
+  background-color: rgb(150, 71, 19);;
+  border-radius: 24px;
+  max-width: 20rem;
+  padding: 12px;
+  border: 2px solid var(--light-green);
 }
+
 
 input[type=text], select {
   width: 100%;
@@ -83,17 +144,55 @@ input[type=text], select {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid var(--light-green);
+  border-radius: 8px;
   box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.input {
+  width: 100%;
+}
+
+#firstName, #lastName{
+  width: 20%;
+}
+
+form button {
+  width: 100%;
+  border-radius: 8px;
+  background: var(--light-green);
+  border: none;
 }
 
 button{
   width: 20%;
-  margin: 1% 1%;
   height: 30px;
+  margin-top: 1.5rem;
+  font-weight: 700;
+  border-style: solid; 
+  border-radius: 10px;
+  color:#dedede;
+  text-align: center;
 }
 
 .small_text{
   font-size: xx-small;
+}
+
+
+@-webkit-keyframes App-header {
+  0% {
+    width: 0%;
+    height: 1px;
+  }
+  50% {
+    width: 100%;
+    height: 1px;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background: #333;
+  }
 }

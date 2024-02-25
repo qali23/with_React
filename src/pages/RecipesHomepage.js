@@ -10,9 +10,7 @@ function RecipesHomepage(){
         <div>
             <header className='App-header'>
                 <h1>RECIPES HOMEPAGE</h1>
-                <MainLayout>
-                    <h1>RECIPES</h1>
-                </MainLayout>
+                <MainLayout></MainLayout>
             </header>
             <body>
                 <article>

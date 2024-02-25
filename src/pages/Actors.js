@@ -34,12 +34,10 @@ function API_database({fetchTrigger, setFetchTrigger}) {
 
     return (
         <div>
-            <ul>{actorNames}</ul>
+            <ul id="chefNames">{actorNames}</ul>
         </div>
     );
 }
-
-
 
 function NewActor({setFetchTrigger}){
     async function addActor(firstName, lastName) {
@@ -74,7 +72,7 @@ function NewActor({setFetchTrigger}){
 
     function handleClick(){
         let firstName = document.getElementById("firstName").value;
-        let lastName = document.getElementById("LastName").value;
+        let lastName = document.getElementById("lastName").value;
         addActor(firstName, lastName)
             .catch(error => {console.log("unsuccessful")});
     }
@@ -87,12 +85,61 @@ function NewActor({setFetchTrigger}){
             </div>
             <div class = "input">
               <label for="Recipe">Surname:</label>
-              <input type="text" id="LastName" name="lname"/>
+              <input type="text" id="lastName" name="lname"/>
             </div>
             <button id="new_actor_submit_button" type="submit" onClick= {(e) => {
               e.preventDefault();
               handleClick();
               }}>submit</button>
+        </div>
+    
+    )
+}
+
+function RemoveActor({setFetchTrigger}){
+    async function deleteActor(firstName, lastName) {
+        const apiURL = "http://localhost:8081/home/deleteActor";
+        
+        const requestData = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ firstName, lastName}),
+        };
+    
+        fetch(apiURL, requestData)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response;
+            })
+            .then(data => {
+                // Handle success response here if needed
+                console.log('Actor deleted successfully:', data);
+                setFetchTrigger(true);
+                return data; // Return data if needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                throw error; // Throw error to handle it outside if needed
+            });
+    }
+
+    function handleClick(){
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+        deleteActor(firstName, lastName)
+            .catch(error => {console.log("unsuccessful")});
+    }
+
+    return(
+        <div>
+            <button id="delete_actor_submit_button" type="submit" onClick= {(e) => {
+              e.preventDefault();
+              handleClick();
+              }}>Delete</button>
         </div>
     
     )
@@ -108,6 +155,7 @@ function Actors(){
                 <MainLayout></MainLayout>
             </header>
             <NewActor setFetchTrigger={setFetchTrigger}/>
+            <RemoveActor setFetchTrigger={setFetchTrigger}/>
             <div>
                 <API_database fetchTrigger={fetchTrigger} setFetchTrigger={setFetchTrigger}/>
             </div>
