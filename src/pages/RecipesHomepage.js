@@ -12,7 +12,7 @@ function RecipesHomepage(){
                 <h1>RECIPES HOMEPAGE</h1>
                 <MainLayout></MainLayout>
             </header>
-            <body>
+            <div>
                 <article>
                     <p>It all started one misty morning in a COTTAGE. Or maybe it did not.</p>
                     <p>Behold, a limited selection of ABSOLUTELY ESSENTIAL and NON-ESSENTIAL recipes of food that you can make</p>
@@ -25,7 +25,7 @@ function RecipesHomepage(){
                     <p>Take wisdom from this vast array of a few recipes and maybe one day you'll be almost but not quite as good a chef as me (unlikely).</p>
                     <img src = {goodChefBadChef} alt = "an image"/>
                 </article>
-            </body>
+            </div>
         </div>
         
     )

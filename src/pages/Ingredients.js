@@ -12,7 +12,7 @@ function Ingredients(){
                 <h1>INGREDIENTS</h1>
                 <MainLayout></MainLayout>
             </header>
-            <body>
+            <div>
                 <article>
                     <img id="si" src = {secretIngredient} alt = "an image"/>
                     <h2>The stuff you make food from</h2>
@@ -23,7 +23,7 @@ function Ingredients(){
                         <li class="small_text">peanut butter</li>
                     </ul>
                 </article>
-            </body>
+            </div>
         </div>
         
     )

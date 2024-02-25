@@ -151,7 +151,7 @@ function Actors(){
     return(
         <div>
             <header className='App-header'>
-                <h1>Chefs</h1>
+                <h1>CHEFS</h1>
                 <MainLayout></MainLayout>
             </header>
             <form>
