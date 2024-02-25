@@ -154,8 +154,10 @@ function Actors(){
                 <h1>Chefs</h1>
                 <MainLayout></MainLayout>
             </header>
-            <NewActor setFetchTrigger={setFetchTrigger}/>
-            <RemoveActor setFetchTrigger={setFetchTrigger}/>
+            <form>
+                <NewActor setFetchTrigger={setFetchTrigger}/>
+                <RemoveActor setFetchTrigger={setFetchTrigger}/>
+            </form>
             <div>
                 <API_database fetchTrigger={fetchTrigger} setFetchTrigger={setFetchTrigger}/>
             </div>

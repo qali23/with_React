@@ -23,11 +23,13 @@ header{
 }
 h1 {
   color: rgb(17, 160, 255);
-  font-size: 2rem;
+  font-size: 3.5rem;
   font-weight: bold;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(1, 88, 104);
 }
 h2 {
-  color: rgba(26, 75, 161, 0.781);
+  color: rgba(3, 31, 78, 0.781);
   text-decoration: underline;
   text-decoration-color: rgba(30, 51, 88, 0.781);
   border-top: 1px solid white;
@@ -35,6 +37,9 @@ h2 {
   border-top: ;
   font-size: 1.75rem;
   font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(0, 217, 255);
+  
 }
 p {
   color: rgb(0, 225, 255);
@@ -152,11 +157,9 @@ input[type=text], select {
 
 .input {
   width: 100%;
+  margin: auto;
 }
 
-#firstName, #lastName{
-  width: 20%;
-}
 
 form button {
   width: 100%;
@@ -174,6 +177,10 @@ button{
   border-radius: 10px;
   color:#dedede;
   text-align: center;
+}
+
+#delete_actor_submit_button{
+  width: 14rem;/*Once it is too small the button stays the same width*/
 }
 
 .small_text{
