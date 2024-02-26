@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 
 function API_database({fetchTrigger, setFetchTrigger}) {
-    const apiURL = "http://34.238.40.69:8081/home/allActors";
+    const apiURL = "http://localhost:8081/home/allFilms";
 
     // Initialize actorNames as empty array
-    const [actorNames, setActorNames] = useState([]);
+    const [films, setFilms] = useState([]);
 
     useEffect(() => {
         fetch(apiURL)
@@ -19,12 +19,13 @@ function API_database({fetchTrigger, setFetchTrigger}) {
             })
             .then(data => {
                 // Map actor data to JSX list items
-                const names = data.map(actor => {
-                    const fullName = `${actor.firstName} ${actor.lastName}`;
-                    return <li key={fullName}>{fullName}</li>;
+                const films = data.map(film => {
+                    const film_title = `${film.title} `
+                    const film_description`${film.description}`;
+                    return <li key={film_title}>{film_description}</li>;
                 });
                 // Update state with actorNames
-                setActorNames(names);
+                setFilmNames(films);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -41,7 +42,7 @@ function API_database({fetchTrigger, setFetchTrigger}) {
 
 function NewActor({setFetchTrigger}){
     async function addActor(firstName, lastName) {
-        const apiURL = "http://localhost:8081/home/addActor";
+        const apiURL = "http://localhost:8081/home/addFilm";
         
         const requestData = {
             method: 'POST',
@@ -145,7 +146,7 @@ function RemoveActor({setFetchTrigger}){
     )
 }
 
-function Actors(){
+function Films(){
     const [fetchTrigger, setFetchTrigger] = useState(false);
 
     return(
@@ -155,8 +156,8 @@ function Actors(){
                 <MainLayout></MainLayout>
             </header>
             <form>
-                <NewActor setFetchTrigger={setFetchTrigger}/>
-                <RemoveActor setFetchTrigger={setFetchTrigger}/>
+                <NewFilm setFetchTrigger={setFetchTrigger}/>
+                <RemoveFIlm setFetchTrigger={setFetchTrigger}/>
             </form>
             <div>
                 <API_database fetchTrigger={fetchTrigger} setFetchTrigger={setFetchTrigger}/>
@@ -165,4 +166,4 @@ function Actors(){
     )
 
 }
-export default Actors;
+export default Films;
