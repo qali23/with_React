@@ -39,12 +39,10 @@ h2 {
   text-decoration-color: rgba(30, 51, 88, 0.781);
   border-top: 1px solid white;
   border-top-style: solid;
-  border-top: ;
   font-size: 1.75rem;
   font-weight: bold;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: rgb(0, 217, 255);
-  
 }
 p {
   color: rgb(0, 225, 255);
