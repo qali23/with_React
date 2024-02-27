@@ -6,6 +6,7 @@ import Blog from './pages/Blog';
 import RecipesHomepage from './pages/RecipesHomepage';
 import Ingredients from './pages/Ingredients';
 import Actors from './pages/Actors';
+import Films from './pages/Films';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
     element: <Ingredients/>,
   },
   {
-    path: "chefs",
+    path: "Actors",
     element: <Actors/>,
+  },
+  {
+    path: "Films",
+    element: <Films/>,
   }
 ]);
 

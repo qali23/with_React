@@ -41,7 +41,7 @@ function API_database({fetchTrigger, setFetchTrigger}) {
 
 function NewActor({setFetchTrigger}){
     async function addActor(firstName, lastName) {
-        const apiURL = "http://localhost:8081/home/addActor";
+        const apiURL = "http://34.238.40.69:8081/home/addActor";
         
         const requestData = {
             method: 'POST',
@@ -98,7 +98,7 @@ function NewActor({setFetchTrigger}){
 
 function RemoveActor({setFetchTrigger}){
     async function deleteActor(firstName, lastName) {
-        const apiURL = "http://localhost:8081/home/deleteActor";
+        const apiURL = "http://34.238.40.69:8081/home/deleteActor";
         
         const requestData = {
             method: 'DELETE',

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 function API_database({fetchTrigger, setFetchTrigger}) {
-    const apiURL = "http://localhost:8081/home/allFilms";
+    const apiURL = "http://34.238.40.69:8081/home/allFilms";
 
     // Initialize actorNames as empty array
     const [films, setFilms] = useState([]);
@@ -21,11 +21,11 @@ function API_database({fetchTrigger, setFetchTrigger}) {
                 // Map actor data to JSX list items
                 const films = data.map(film => {
                     const film_title = `${film.title} `
-                    const film_description`${film.description}`;
-                    return <li key={film_title}>{film_description}</li>;
+                    const film_description = `${film.description}`;
+                    return <li key={film_title}><h2>{film_title}</h2><p>{film_description}</p></li>;
                 });
                 // Update state with actorNames
-                setFilmNames(films);
+                setFilms(films);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -35,21 +35,21 @@ function API_database({fetchTrigger, setFetchTrigger}) {
 
     return (
         <div>
-            <ul id="chefNames">{actorNames}</ul>
+            <ul id="filmNames">{films}</ul>
         </div>
     );
 }
 
-function NewActor({setFetchTrigger}){
-    async function addActor(firstName, lastName) {
-        const apiURL = "http://localhost:8081/home/addFilm";
+function NewFilm({setFetchTrigger}){
+    async function addFilm(title, description) {
+        const apiURL = "http://34.238.40.69:8081/home/addFilm";
         
         const requestData = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ firstName, lastName}),
+            body: JSON.stringify({ title, description}),
         };
     
         fetch(apiURL, requestData)
@@ -61,7 +61,7 @@ function NewActor({setFetchTrigger}){
             })
             .then(data => {
                 // Handle success response here if needed
-                console.log('Actor added successfully:', data);
+                console.log('Film added successfully:', data);
                 setFetchTrigger(true);
                 return data; // Return data if needed
             })
@@ -72,23 +72,23 @@ function NewActor({setFetchTrigger}){
     }
 
     function handleClick(){
-        let firstName = document.getElementById("firstName").value;
-        let lastName = document.getElementById("lastName").value;
-        addActor(firstName, lastName)
+        let title = document.getElementById("title").value;
+        let description = document.getElementById("description").value;
+        addFilm(title, description)
             .catch(error => {console.log("unsuccessful")});
     }
 
     return(
         <div>
             <div class = "input">
-              <label for="dish">First Name:</label>
-              <input type="text" id="firstName" name="fname"/>
+              <label for="dish">Title:</label>
+              <input type="text" id="title" name="fname"/>
             </div>
             <div class = "input">
-              <label for="Recipe">Surname:</label>
-              <input type="text" id="lastName" name="lname"/>
+              <label for="Recipe">description:</label>
+              <input type="text" id="description" name="lname"/>
             </div>
-            <button id="new_actor_submit_button" type="submit" onClick= {(e) => {
+            <button id="new_film_submit_button" type="submit" onClick= {(e) => {
               e.preventDefault();
               handleClick();
               }}>submit</button>
@@ -97,16 +97,16 @@ function NewActor({setFetchTrigger}){
     )
 }
 
-function RemoveActor({setFetchTrigger}){
-    async function deleteActor(firstName, lastName) {
-        const apiURL = "http://localhost:8081/home/deleteActor";
+function RemoveFilm({setFetchTrigger}){
+    async function deleteFilm(title) {
+        const apiURL = "http://34.238.40.69:8081/home/deleteFilm";
         
         const requestData = {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ firstName, lastName}),
+            body: JSON.stringify({title}),
         };
     
         fetch(apiURL, requestData)
@@ -118,7 +118,7 @@ function RemoveActor({setFetchTrigger}){
             })
             .then(data => {
                 // Handle success response here if needed
-                console.log('Actor deleted successfully:', data);
+                console.log('Film deleted successfully:', data);
                 setFetchTrigger(true);
                 return data; // Return data if needed
             })
@@ -129,15 +129,14 @@ function RemoveActor({setFetchTrigger}){
     }
 
     function handleClick(){
-        let firstName = document.getElementById("firstName").value;
-        let lastName = document.getElementById("lastName").value;
-        deleteActor(firstName, lastName)
+        let title = document.getElementById("title").value;
+        deleteFilm(title)
             .catch(error => {console.log("unsuccessful")});
     }
 
     return(
         <div>
-            <button id="delete_actor_submit_button" type="submit" onClick= {(e) => {
+            <button id="delete_film_submit_button" type="submit" onClick= {(e) => {
               e.preventDefault();
               handleClick();
               }}>Delete</button>
@@ -152,12 +151,12 @@ function Films(){
     return(
         <div>
             <header className='App-header'>
-                <h1>ACTORS</h1>
+                <h1>Films</h1>
                 <MainLayout></MainLayout>
             </header>
             <form>
                 <NewFilm setFetchTrigger={setFetchTrigger}/>
-                <RemoveFIlm setFetchTrigger={setFetchTrigger}/>
+                <RemoveFilm setFetchTrigger={setFetchTrigger}/>
             </form>
             <div>
                 <API_database fetchTrigger={fetchTrigger} setFetchTrigger={setFetchTrigger}/>
