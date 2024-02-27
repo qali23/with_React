@@ -13,6 +13,7 @@ function MainLayout({children}){
                 <Link id="actors" to="/actors">Actors</Link>
                 <Link id="films" to="/films">Films</Link>
                 <div>{children}</div>
+                
             </nav> 
         </div>
     )
