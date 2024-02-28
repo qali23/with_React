@@ -61,6 +61,8 @@ p {
 ul{
   color: rgb(0, 225, 255);
   margin-top: 2rem;
+  border-left: 1px solid #dedede;
+  padding-left: 1rem;
   
 }
 #actorNames{
@@ -215,7 +217,10 @@ button{
   font-weight: 700;
   font-size: small;
   width: 10rem;
-  border-style: none;
+  border: 1px solid beige;
+  border-bottom-left-radius: 0%;
+  border-bottom-right-radius: 0%;
+  border-bottom: none;
 }
 .mini-input{
   font-size: x-small;
