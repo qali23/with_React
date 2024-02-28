@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Blog from './pages/Blog';
-import RecipesHomepage from './pages/RecipesHomepage';
+import Homepage from './pages/Homepage';
 import Ingredients from './pages/Ingredients';
 import Actors from './pages/Actors';
 import Films from './pages/Films';
@@ -23,8 +23,8 @@ const router = createBrowserRouter([
     element: <Blog/>,
   },
   {
-    path: "recipe_homepage",
-    element: <RecipesHomepage/>,
+    path: "homepage",
+    element: <Homepage/>,
   },
   {
     path: "ingredients",

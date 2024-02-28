@@ -1,12 +1,13 @@
 import React, {useEffect, useState, useContext} from "react";
 import MainLayout from '../layout/MainLayout';
 import { Link } from "react-router-dom";
-
+const baseURL = "3.86.207.43";
+const localURL = "localhost";
 
 function API_database({fetchTrigger, setFetchTrigger}) {
-    const apiURL = "http://34.238.40.69:8081/home/allFilms";
+    
+    const apiURL = "http://" + baseURL + ":8081/home/allFilms";
 
-    // Initialize actorNames as empty array
     const [films, setFilms] = useState([]);
 
     useEffect(() => {
@@ -21,10 +22,11 @@ function API_database({fetchTrigger, setFetchTrigger}) {
                 // Map actor data to JSX list items
                 const films = data.map(film => {
                     const film_title = `${film.title} `
+                    const filmID = `${film.filmID}`
                     const film_description = `${film.description}`;
-                    return <li key={film_title}><h2>{film_title}</h2><p>{film_description}</p></li>;
+                    return <li key={film_title}><h2 class="filmIDs">Film ID: {filmID}</h2><h2>{film_title}</h2><p>{film_description}</p></li>;
                 });
-                // Update state with actorNames
+                // Update state with film names
                 setFilms(films);
             })
             .catch(error => {
@@ -42,14 +44,15 @@ function API_database({fetchTrigger, setFetchTrigger}) {
 
 function NewFilm({setFetchTrigger}){
     async function addFilm(title, description) {
-        const apiURL = "http://34.238.40.69:8081/home/addFilm";
+        const apiURL = "http://" + baseURL +":8081/home/addFilm";
+        const language_id = 1;
         
         const requestData = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ title, description}),
+            body: JSON.stringify({ title, description, language_id}),
         };
     
         fetch(apiURL, requestData)
@@ -91,7 +94,7 @@ function NewFilm({setFetchTrigger}){
             <button id="new_film_submit_button" type="submit" onClick= {(e) => {
               e.preventDefault();
               handleClick();
-              }}>submit</button>
+              }}>Submit</button>
         </div>
     
     )
@@ -99,7 +102,7 @@ function NewFilm({setFetchTrigger}){
 
 function RemoveFilm({setFetchTrigger}){
     async function deleteFilm(title) {
-        const apiURL = "http://34.238.40.69:8081/home/deleteFilm";
+        const apiURL = "http://"+ baseURL+":8081/home/deleteFilm";
         
         const requestData = {
             method: 'DELETE',
@@ -151,10 +154,10 @@ function Films(){
     return(
         <div>
             <header className='App-header'>
-                <h1>Films</h1>
+                <h1 data-testid="Films_title">FILMS</h1>
                 <MainLayout></MainLayout>
             </header>
-            <form>
+            <form id="add+remove_film"> 
                 <NewFilm setFetchTrigger={setFetchTrigger}/>
                 <RemoveFilm setFetchTrigger={setFetchTrigger}/>
             </form>

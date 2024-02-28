@@ -7,13 +7,11 @@ function MainLayout({children}){
         <div ClassName="App-header">
             <nav>
                 
-                <Link id="recipesHomepage" to="/recipe_homepage">Recipes Homepage</Link>
-                <Link id="allRecipes" to="/">All Recipes</Link>
-                <Link id="ingredients" to="/ingredients">Ingredients</Link>
+                <Link id="homepage" to="/homepage">Homepage</Link>
                 <Link id="actors" to="/actors">Actors</Link>
                 <Link id="films" to="/films">Films</Link>
                 <div>{children}</div>
-                
+
             </nav> 
         </div>
     )

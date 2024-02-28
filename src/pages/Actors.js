@@ -1,15 +1,107 @@
 import React, {useEffect, useState, useContext} from "react";
 import MainLayout from '../layout/MainLayout';
 import { Link } from "react-router-dom";
+const baseURL = "3.86.207.43";
+const localURL = "localhost";
 
+function FilmsForActor({actor, show}){
+    const newApiURL = "http://"+baseURL+":8081/home/actor/";
+    const [actorData, setActorData] = useState(null);//Selected actor full data
+    const [triggerFetch, setTriggerFetch] = useState(false);
+
+    useEffect(() => {//when selected actor changes, this fetches full data for that actor
+        fetch(newApiURL + actor.actorID)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setActorData(data)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            setTriggerFetch(false);
+    }, [triggerFetch]);
+
+    async function addFilmToActor(filmID) {
+        const apiURL = "http://"+baseURL+":8081/home/addFilmToActor/"+actor.actorID + "/" + filmID;
+        
+        const requestData = {
+            method: 'POST'
+        };
+    
+        fetch(apiURL, requestData)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response;
+            })
+            .then(data => {
+                // Handle success response here if needed
+                console.log('Film added to actor successfully:', data);
+                setTriggerFetch(true);
+                return data; // Return data if needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                throw error; // Throw error to handle it outside if needed
+            });
+    }
+
+    function handleClick(){
+        let filmID = document.getElementById("filmID").value;
+        addFilmToActor(filmID)
+            .catch(error => {console.log("unsuccessful")});
+    }
+
+    if (show){
+        return(
+            <ul>
+                <div class = "mini-input">
+                    <label for="dish">Film ID:</label>
+                    <input type="text" className="filmID" name="fname"/>
+                    <button className="addFilm" onClick= {handleClick}>Add</button>
+                </div>
+                {actorData.filmsActedIn.map(film => (
+                    <li className="actorFilmList">
+                        {film.title} {film.filmID}
+                    </li>
+                ))}
+            </ul>
+        );
+    } else{
+        return <div></div>
+    }
+    
+}
+
+function EachActor({actor}){
+    const [show, setShow]= useState(false);
+
+    function handleClick(){
+        setShow(!show);
+    }
+
+    return(
+        <div>
+           <button className="each_actor_button" type="submit" onClick= {handleClick}>{actor.firstName} {actor.lastName}</button>
+            <FilmsForActor actor={actor} show={show}/>
+        </div>
+    )
+
+}
 
 function API_database({fetchTrigger, setFetchTrigger}) {
-    const apiURL = "http://34.238.40.69:8081/home/allActors";
+    const apiURL = "http://"+baseURL+":8081/home/allActors";
+    
 
-    // Initialize actorNames as empty array
-    const [actorNames, setActorNames] = useState([]);
+    const [actors, setActors] = useState([]);//All the actors: just name, id
 
-    useEffect(() => {
+    useEffect(() => {//Fetches all the actors basic data
         fetch(apiURL)
             .then(response => {
                 if (!response.ok) {
@@ -18,30 +110,29 @@ function API_database({fetchTrigger, setFetchTrigger}) {
                 return response.json();
             })
             .then(data => {
-                // Map actor data to JSX list items
-                const names = data.map(actor => {
-                    const fullName = `${actor.firstName} ${actor.lastName}`;
-                    return <li key={fullName}>{fullName}</li>;
-                });
-                // Update state with actorNames
-                setActorNames(names);
+                setActors(data);
             })
             .catch(error => {
                 console.error('Error:', error);
             });
             setFetchTrigger(false);
     }, [fetchTrigger]);
-
+    
     return (
         <div>
-            <ul id="chefNames">{actorNames}</ul>
+            <ul id="actorNames">{actors.map(actor => (
+                <li class="listOfActors">
+                    <EachActor actor={actor}/>
+                </li>
+                ))}
+            </ul>
         </div>
     );
 }
 
 function NewActor({setFetchTrigger}){
     async function addActor(firstName, lastName) {
-        const apiURL = "http://34.238.40.69:8081/home/addActor";
+        const apiURL = "http://"+baseURL+":8081/home/addActor";
         
         const requestData = {
             method: 'POST',
@@ -80,17 +171,17 @@ function NewActor({setFetchTrigger}){
     return(
         <div>
             <div class = "input">
-              <label for="dish">First Name:</label>
+              <label for="firstName">First Name:</label>
               <input type="text" id="firstName" name="fname"/>
             </div>
             <div class = "input">
-              <label for="Recipe">Surname:</label>
+              <label for="lastName">Surname:</label>
               <input type="text" id="lastName" name="lname"/>
             </div>
             <button id="new_actor_submit_button" type="submit" onClick= {(e) => {
               e.preventDefault();
               handleClick();
-              }}>submit</button>
+              }}>Submit</button>
         </div>
     
     )
@@ -98,7 +189,7 @@ function NewActor({setFetchTrigger}){
 
 function RemoveActor({setFetchTrigger}){
     async function deleteActor(firstName, lastName) {
-        const apiURL = "http://34.238.40.69:8081/home/deleteActor";
+        const apiURL = "http://"+baseURL+":8081/home/deleteActor";
         
         const requestData = {
             method: 'DELETE',
@@ -151,10 +242,10 @@ function Actors(){
     return(
         <div>
             <header className='App-header'>
-                <h1>ACTORS</h1>
+                <h1 data-testid="Actors_title">ACTORS</h1>
                 <MainLayout></MainLayout>
             </header>
-            <form>
+            <form id="add+remove_actor">
                 <NewActor setFetchTrigger={setFetchTrigger}/>
                 <RemoveActor setFetchTrigger={setFetchTrigger}/>
             </form>
